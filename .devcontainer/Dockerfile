@@ -1,4 +1,8 @@
 FROM mcr.microsoft.com/devcontainers/dotnet:6.0
+RUN apt-get update \
+    && apt-get install -y libicu-dev \
+    && apt-get clean
+
 
 # Install NodeJS
 # [Choice] Node.js version: none, lts/*, 18, 16, 14
@@ -45,3 +49,5 @@ RUN chmod +x /home/vscode/azure-pipelines/start.sh
 
 # Clean up
 RUN rm -rf /var/lib/apt/lists/* /tmp/library-scripts
+
+ENV DOTNET_SYSTEM_GLOBALIZATION_INVARIANT=false
