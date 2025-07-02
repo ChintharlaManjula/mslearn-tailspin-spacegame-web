@@ -1,4 +1,4 @@
-FROM mcr.microsoft.com/devcontainers/dotnet:6.0
+FROM mcr.microsoft.com/devcontainers/dotnet:8.0
 
 # Verify dotnet installation
 RUN dotnet --info
