@@ -1,5 +1,5 @@
 {
-  "name": "DotNet6DevContainer",
+  "name": "DotNet8DevContainer",
   "dockerFile": "Dockerfile",
   "customizations": {
     "vscode": {
