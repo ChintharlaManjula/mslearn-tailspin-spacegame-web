@@ -14,9 +14,9 @@
     }
   displayName: 'Compile Sass assets'
 
-# ✅ Install gulp CLI globally
-- script: 'npm install --global gulp-cli'
-  displayName: 'Install Gulp CLI globally'
 
-- task: gulp@1
+
+- script: 'npx gulp'
   displayName: 'Run gulp tasks'
+  workingDirectory: Tailspin.SpaceGame.Web
+
