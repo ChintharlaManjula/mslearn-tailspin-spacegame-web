@@ -20,13 +20,21 @@ steps:
     command: 'install'
     verbose: false
 
-- script: 'npx sass Tailspin.SpaceGame.Web/wwwroot Tailspin.SpaceGame.Web/wwwroot'
+# ✅ Sass compilation with directory check
+- script: |
+    if [ -d "Tailspin.SpaceGame.Web/wwwroot/scss" ]; then
+      echo "SCSS directory found. Compiling..."
+      npx sass Tailspin.SpaceGame.Web/wwwroot/scss:Tailspin.SpaceGame.Web/wwwroot/css
+    else
+      echo "SCSS directory not found. Skipping Sass compilation."
+    fi
   displayName: 'Compile Sass assets'
 
 - task: gulp@1
   displayName: 'Run gulp tasks'
 
-- script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
+- script: |
+    echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt
   displayName: 'Write build info'
   workingDirectory: Tailspin.SpaceGame.Web/wwwroot
 
