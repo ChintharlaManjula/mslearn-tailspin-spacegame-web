@@ -32,7 +32,6 @@ steps:
   displayName: 'Compile Sass assets'
 
 
-
 - task: gulp@1
   displayName: 'Run gulp tasks'
 
@@ -40,6 +39,9 @@ steps:
     echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt
   displayName: 'Write build info'
   workingDirectory: Tailspin.SpaceGame.Web/wwwroot
+- script: 'npx gulp'
+  displayName: 'Run gulp tasks'
+  workingDirectory: Tailspin.SpaceGame.Web
 
 - task: DotNetCoreCLI@2
   displayName: 'Restore project dependencies'
