@@ -2,56 +2,42 @@ trigger:
 - '*'
 
 pool:
-  name: 'Default'  # Make sure your self-hosted agent is online and in this pool
+  name: 'Default' # Replace Default with the name of your agent pool if you used a different pool
 
 variables:
   buildConfiguration: 'Release'
 
 steps:
-# Ensure Node.js v18 is used (if needed, install manually on the agent machine)
-- task: NodeTool@0
+- task: UseDotNet@2
+  displayName: 'Use .NET SDK 6.x'
   inputs:
-    versionSpec: '18.x'
-  displayName: 'Use Node.js v18'
+    packageType: sdk
+    version: '6.x'
 
-# Clean node_modules to avoid EPERM errors
-- script: |
-    if exist node_modules rd /s /q node_modules
-    if exist package-lock.json del package-lock.json
-  displayName: 'Clean node_modules'
-
-# Install dependencies with legacy peer deps to avoid compatibility issues
 - task: Npm@1
   displayName: 'Run npm install'
   inputs:
-    command: 'install'
     verbose: false
-    customCommand: 'install --legacy-peer-deps'
 
-# Compile Sass assets (consider switching to `sass` instead of `node-sass`)
 - script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
 
-# Run gulp tasks
-- task: Gulp@1
+- task: gulp@1
   displayName: 'Run gulp tasks'
 
-# Write build info
 - script: 'echo "$(Build.DefinitionName), $(Build.BuildId), $(Build.BuildNumber)" > buildinfo.txt'
   displayName: 'Write build info'
   workingDirectory: Tailspin.SpaceGame.Web/wwwroot
 
-# Restore project dependencies
 - task: DotNetCoreCLI@2
   displayName: 'Restore project dependencies'
   inputs:
     command: 'restore'
     projects: '**/*.csproj'
 
-# Build the project
 - task: DotNetCoreCLI@2
   displayName: 'Build the project - Release'
   inputs:
     command: 'build'
-    arguments: '--no-restore --configuration $(buildConfiguration)'
+    arguments: '--no-restore --configuration Release'
     projects: '**/*.csproj'
