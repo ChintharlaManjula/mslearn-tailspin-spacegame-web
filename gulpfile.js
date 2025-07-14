@@ -11,9 +11,10 @@ const paths = {
   webroot: "./Tailspin.SpaceGame.Web/wwwroot/"
 };
 
-paths.js = paths.webroot + "js/**/*.js";
+root + "js/**/*.js";
 paths.minJs = paths.webroot + "js/**/*.min.js";
-pathsCss = paths.webroot + "css/**/*.min.css";
+paths.css = paths.webroot + "css/**/*.css";
+paths.minCss = paths.webroot + "css/**/*.min.css";
 paths.concatJsDest = paths.webroot + "js/site.min.js";
 paths.concatCssDest = paths.webroot + "css/site.min.css";
 
@@ -22,10 +23,10 @@ gulp.task("clean:css", done => rimraf(paths.concatCssDest, done));
 gulp.task("clean", gulp.series(["clean:js", "clean:css"]));
 
 gulp.task("min:js", () => {
-  return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
+  return gulp.src([paths.js, "!" +.minJs], { base: "." })
     .pipe(concat(paths.concatJsDest))
     .pipe(uglify())
-   (gulp.dest("."));
+    .pipe(gulp.dest("."));
 });
 
 gulp.task("min:css", () => {
