@@ -2,7 +2,7 @@ trigger:
 - '*'
 
 pool:
-  name: 'Default' 
+  name: 'Default' # Replace Default with the name of your agent pool if you used a different pool
 
 variables:
   buildConfiguration: 'Release'
@@ -17,8 +17,8 @@ steps:
 - task: Npm@1
   displayName: 'Run npm install'
   inputs:
-   versionSpec: '18.x'
-   
+    command: 'install'
+    verbose: false
 
 - script: './node_modules/.bin/node-sass Tailspin.SpaceGame.Web/wwwroot --output Tailspin.SpaceGame.Web/wwwroot'
   displayName: 'Compile Sass assets'
