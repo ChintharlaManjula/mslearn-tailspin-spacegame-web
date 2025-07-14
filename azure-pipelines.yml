@@ -23,7 +23,7 @@ steps:
 # ✅ Sass compilation with Bash shell and directory check
 - script: |
     if [ -d "Tailspin.SpaceGame.Web/wwwroot/scss" ]; then
-      echo "✅ SCSS directory found. Compiling..."
+      echo " SCSS directory found. Compiling..."
       npx sass Tailspin.SpaceGame.Web/wwwroot/scss:Tailspin.SpaceGame.Web/wwwroot/css
     else
       echo "⚠️ SCSS directory not found. Skipping Sass compilation."
