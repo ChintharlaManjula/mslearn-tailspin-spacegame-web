@@ -21,14 +21,16 @@ steps:
     verbose: false
 
 # ✅ Sass compilation with Bash shell and directory check
-- bash: |
-    if [ -d "Tailspin.SpaceGame.Web/wwwroot/scss" ]; then
-      echo "✅ SCSS directory found. Compiling..."
+- powershell: |
+    $scssPath = "Tailspin.SpaceGame.Web/wwwroot/scss"
+    if (Test-Path $scssPath) {
+      Write-Host "✅ SCSS directory found. Compiling..."
       npx sass Tailspin.SpaceGame.Web/wwwroot/scss:Tailspin.SpaceGame.Web/wwwroot/css
-    else
-      echo "⚠️ SCSS directory not found. Skipping Sass compilation."
-    fi
+    } else {
+      Write-Host "⚠️ SCSS directory not found. Skipping Sass compilation."
+    }
   displayName: 'Compile Sass assets'
+
 
 
 - task: gulp@1
