@@ -21,15 +21,15 @@ steps:
     verbose: false
 
 # ✅ Sass compilation with Bash shell and directory check
-- script: |
+- bash: |
     if [ -d "Tailspin.SpaceGame.Web/wwwroot/scss" ]; then
-      echo " SCSS directory found. Compiling..."
+      echo "✅ SCSS directory found. Compiling..."
       npx sass Tailspin.SpaceGame.Web/wwwroot/scss:Tailspin.SpaceGame.Web/wwwroot/css
     else
       echo "⚠️ SCSS directory not found. Skipping Sass compilation."
     fi
   displayName: 'Compile Sass assets'
-  shell: bash
+
 
 - task: gulp@1
   displayName: 'Run gulp tasks'
