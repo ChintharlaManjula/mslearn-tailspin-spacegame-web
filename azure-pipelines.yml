@@ -20,7 +20,8 @@ steps:
     command: 'install'
     verbose: false
 
-- script: 'npx sass Tailspin.SpaceGame.Web/wwwroot Tailspin.SpaceGame.Web/wwwroot'
+
+- script: 'npx sass Tailspin.SpaceGame.Web/wwwroot/scss:Tailspin.SpaceGame.Web/wwwroot/css'
   displayName: 'Compile Sass assets'
 
 - task: gulp@1
