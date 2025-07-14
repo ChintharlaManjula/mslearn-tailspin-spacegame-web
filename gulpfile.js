@@ -23,7 +23,7 @@ gulp.task("clean:css", done => rimraf(paths.concatCssDest, done));
 gulp.task("clean", gulp.series(["clean:js", "clean:css"]));
 
 gulp.task("min:js", () => {
-  return gulp.src([paths.js, "!" +.minJs], { base: "." })
+  return gulp.src([paths.js, "!" + paths.minJs], { base: "." })
     .pipe(concat(paths.concatJsDest))
     .pipe(uglify())
     .pipe(gulp.dest("."));
